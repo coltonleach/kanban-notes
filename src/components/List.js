@@ -1,16 +1,12 @@
 import React from 'react'
 
-const List = ({ list }) => {
-
-  const handleClick = (id) => {
-    console.log('click', id)
-  }
+const List = ({ list, handleAddNote, handleNoteClick }) => {
 
   return (
   <div className='list-container'>
-    <h2>{list.title}</h2>
-    {list.notes.map((note, index) => <p key={index} onClick={() => handleClick(note.id)}>{note.body}</p>)}
-    <p>Add Note</p>
+    <textarea value={list.title} rows='1' />
+    {list.notes.map((note, index) => <p key={index} onClick={() => handleNoteClick(note.id)}>{note.body}</p>)}
+    <p onClick={() => handleAddNote(list.id)}>Add Note</p>
   </div>
   )
 }
