@@ -1,0 +1,68 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "To Do",
+      "notes": [
+        {
+          "id": 1,
+          "body": "add blob that follows cursor"
+        },
+        {
+          "id": 2,
+          "body": "add lazy loading"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "In Progress",
+      "notes": [
+        {
+          "id": 10,
+          "body": "Hero Section"
+        },
+        {
+          "id": 20,
+          "body": "Refactor styles"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Needs Review",
+      "notes": [
+        {
+          "id": 3,
+          "body": "Design header"
+        },
+        {
+          "id": 4,
+          "body": "Create styles"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Finished",
+      "notes": [
+        {
+          "id": 5,
+          "body": "Design Homepage"
+        },
+        {
+          "id": 6,
+          "body": "Design contact page"
+        },
+        {
+          "id": 7,
+          "body": "Design something else"
+        },
+        {
+          "id": 8,
+          "body": "Last design"
+        }
+      ]
+    }
+  ]
+}
