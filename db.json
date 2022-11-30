@@ -5,12 +5,12 @@
       "title": "To Do",
       "notes": [
         {
-          "id": 1,
-          "body": "add blob that follows cursor"
+          "id": 2,
+          "body": "New note"
         },
         {
-          "id": 2,
-          "body": "add lazy loading"
+          "id": 4,
+          "body": "New note"
         }
       ]
     },
@@ -23,8 +23,8 @@
           "body": "Hero Section"
         },
         {
-          "id": 20,
-          "body": "Refactor styles"
+          "id": 2,
+          "body": "New note"
         }
       ]
     },
@@ -37,8 +37,8 @@
           "body": "Design header"
         },
         {
-          "id": 4,
-          "body": "Create styles"
+          "id": 2,
+          "body": "New note"
         }
       ]
     },

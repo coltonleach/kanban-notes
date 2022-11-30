@@ -5,8 +5,10 @@ import SelectedNote from '../components/SelectedNote'
 import axios from 'axios'
 
 function Kanban() {
-  const [activeNote, setActiveNote] = useState(null) //when selecting a note, open a modal asking to edit the text, delete the note, or change the list the note is in.
-
+  const [activeNote, setActiveNote] = useState({
+    listId: null,
+    note: null,
+  }) //when selecting a note, open a modal asking to edit the text, delete the note, or change the list the note is in.
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -15,11 +17,25 @@ function Kanban() {
     })
   }, [])
 
-  const handleAddNote = (id) => {
-    const selectedList = data.find((lists) => lists.id === id) //when clicking `Add Note`, we need to know what list its from. This selects the list
+  const handleNoteDelete = (listId, noteId) => {
+    const selectedList = data.find((lists) => lists.id === listId) //This selects the list the note is in
+    const updatedNotes = selectedList.notes.filter((note) => note.id !== noteId) //selectedList is an object
+    const updatedList = {
+      ...selectedList,
+      notes: updatedNotes,
+    }
+
+    axios.put(`${process.env.REACT_APP_URI}/tasks/${listId}`, updatedList)
+
+    setData(data.map((list) => (list.id === listId ? updatedList : list)))
+    setActiveNote({ listId: null, note: null })
+  }
+
+  const handleAddNote = (listId) => {
+    const selectedList = data.find((lists) => lists.id === listId) //when clicking `Add Note`, we need to know what list its from. This selects the list
 
     const newNote = {
-      id: Math.floor(Math.random() * 10000),
+      id: selectedList.notes.length + 1,
       body: 'New note',
     }
 
@@ -29,22 +45,31 @@ function Kanban() {
       notes: selectedList.notes.concat(newNote),
     }
 
-    setData(data.map((list) => (list.id === id ? updatedList : list))) //updates the state with the updated list
+    axios.put(`${process.env.REACT_APP_URI}/tasks/${listId}`, updatedList)
+
+    setData(data.map((list) => (list.id === listId ? updatedList : list))) //updates the state with the updated list
   }
 
-  const handleNoteClick = (id) => {
+  const handleNoteClick = (listId, noteId) => {
     let newArray = []
     data.map((lists) => (newArray = newArray.concat(lists.notes)))
 
-    setActiveNote(newArray.find((note) => note.id === id))
+    setActiveNote({
+      listId,
+      note: newArray.find((note) => note.id === noteId),
+    })
   }
 
-  const handleNoteClose = () => setActiveNote(null)
+  const handleNoteClose = () => setActiveNote({ listId: null, note: null })
 
   return (
     <div>
-      {activeNote && (
-        <SelectedNote handleNoteClose={handleNoteClose} note={activeNote} />
+      {!!activeNote.note && (
+        <SelectedNote
+          handleNoteClose={handleNoteClose}
+          handleNoteDelete={handleNoteDelete}
+          activeNote={activeNote}
+        />
       )}
       <h1>Kanban View</h1>
       <div className='kanban-container'>

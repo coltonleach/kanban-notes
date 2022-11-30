@@ -5,7 +5,7 @@ const List = ({ list, handleAddNote, handleNoteClick }) => {
     <div className='list-container'>
       <textarea value={list.title} rows='1' />
       {list.notes.map((note) => (
-        <p key={note.id} onClick={() => handleNoteClick(note.id)}>
+        <p key={note.id} onClick={() => handleNoteClick(list.id, note.id)}>
           {note.body}
         </p>
       ))}

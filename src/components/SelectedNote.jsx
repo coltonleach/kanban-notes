@@ -1,19 +1,23 @@
 import React from 'react'
 import { RiCloseLine } from 'react-icons/ri'
 
-const SelectedNote = ({ note, handleNoteClose }) => {
+const SelectedNote = ({ activeNote, handleNoteClose, handleNoteDelete }) => {
   return (
     <div className='selected-note-modal'>
       <div className='selected-note-container'>
-        <p>{note.body}</p>
+        <textarea value={activeNote.note.body} rows='1' />
         <span onClick={handleNoteClose} className='close'>
           <RiCloseLine />
         </span>
         <div className='btn-container'>
           <button className='btn-save'>Save</button>
-          <button className='btn-delete'>Delete</button>
-          <button onClick={handleNoteClose} className='btn-cancel'>
-            Cancel
+          <button
+            className='btn-delete'
+            onClick={() =>
+              handleNoteDelete(activeNote.listId, activeNote.note.id)
+            }
+          >
+            Delete
           </button>
         </div>
       </div>
